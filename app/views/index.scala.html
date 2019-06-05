@@ -1,0 +1,11 @@
+@()(implicit request: MessagesRequestHeader)
+
+@main("DataSizeCalculator") {
+    @helper.form(action=routes.DataSizeCalculatorController.calculateResult) {
+    @helper.CSRF.formField
+    <h2>データ型定義を入力してください</h2>
+    <textarea name="userdatatype" style="width: 500pt; height: 500pt;"></textarea>
+    <br>
+    <button>送信</button>
+    }
+}

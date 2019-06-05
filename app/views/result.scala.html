@@ -1,0 +1,12 @@
+@(resultList: List[(String, Int)])(implicit request: MessagesRequestHeader)
+
+@main("DataSizeCalculator") {
+    @if(resultList.length == 0) {
+        <p>@for(i <- 1 to 10000){失敗した}</p>
+
+    } else {
+        @for(i <- resultList){
+            <p>@{i._1} : @{i._2}</p>
+        }
+    }
+}
