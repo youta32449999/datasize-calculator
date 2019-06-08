@@ -2,11 +2,10 @@ package controllers
 
 import javax.inject.Inject
 import javax.inject.Singleton
-import play.api.mvc.Action
-import play.api.mvc.AnyContent
+
 import play.api.mvc.MessagesAbstractController
 import play.api.mvc.MessagesControllerComponents
-import play.api.mvc.Request
+
 
 @Singleton
 class DataSizeCalculatorController @Inject()(cc: MessagesControllerComponents) extends MessagesAbstractController(cc) {
@@ -15,7 +14,7 @@ class DataSizeCalculatorController @Inject()(cc: MessagesControllerComponents) e
   import services.DataTypeParser._
 
   def index() = Action {implicit request =>
-    Ok(views.html.index())
+    Ok(views.html.datasize_calculate.home())
   }
 
   def calculateResult() = Action {implicit request =>
@@ -26,7 +25,7 @@ class DataSizeCalculatorController @Inject()(cc: MessagesControllerComponents) e
       case Success(result, _) => DataTypeCalculator(result)
       case _ => Map()
     }
-    println(parseResult)
-    Ok(views.html.result(parseResult.toList))
+
+    Ok(views.html.datasize_calculate.result(parseResult.toList))
   }
 }
