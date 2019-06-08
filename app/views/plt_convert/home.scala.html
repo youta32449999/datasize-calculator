@@ -1,0 +1,13 @@
+@()(implicit request: MessagesRequestHeader)
+
+@main("ページレイアウト変換") {
+    @helper.form(action = routes.PLTConverterController.upload, 'enctype -> "multipart/form-data") {
+        @helper.CSRF.formField
+        <h2>PLTファイルを選択してください</h2>
+        <input type="file" name="plt_file">
+
+        <p><input type="submit"></p>
+
+    }
+}
+
