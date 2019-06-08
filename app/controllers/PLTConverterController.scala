@@ -18,24 +18,32 @@ class PLTConverterController @Inject()(cc: MessagesControllerComponents)(implici
 
   def upload() = Action(parse.multipartFormData) { request =>
 
-    // uploadされたfileの名前を取得
-    val fileName = request.body.file("plt_file").get.filename
+    request.body.file("plt_file") match {
+      case Some(uploadFile) => {
 
-    // uploadされたfileを一時的に保存
-    request.body.file("plt_file").get.ref.copyTo(Paths.get(s"./tmp/cache/$fileName"), replace = true)
+        // uploadされたfileの名前を取得
+        val fileName = uploadFile.filename
 
-    // pltをコンバート
-    val result = PLTConverter(s"./tmp/cache/$fileName")
+        // uploadされたfileを一時的に保存
+        uploadFile.ref.copyTo(Paths.get(s"./tmp/cache/$fileName"), replace = true)
 
-    // 新規ファイル作成
-    val file = Paths.get(s"./tmp/converted/$fileName")
-    if (Files.notExists(file)) Files.createFile(file)
+        // pltをコンバート
+        val result = PLTConverter(s"./tmp/cache/$fileName")
 
-    // 書き込み
-    val pw = new PrintWriter(s"./tmp/converted/$fileName")
-    pw.write(result)
-    pw.close
-    Redirect(routes.PLTConverterController.download(s"./tmp/converted/${fileName}"))
+        // 新規ファイル作成
+        val file = Paths.get(s"./tmp/converted/$fileName")
+        if (Files.notExists(file)) Files.createFile(file)
+
+        // 書き込み
+        val pw = new PrintWriter(s"./tmp/converted/$fileName")
+        pw.write(result)
+        pw.close
+
+        // 結果をダウンロード
+        Redirect(routes.PLTConverterController.download(s"./tmp/converted/${fileName}"))
+      }
+      case None => Redirect(routes.PLTConverterController.index)
+    }
   }
 
   def download(fileName: String) = Action {implicit request =>
