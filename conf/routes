@@ -1,5 +1,14 @@
-GET /   controllers.DataSizeCalculatorController.index
+# HOME
+GET /   controllers.HomeController.index
 
-POST /result   controllers.DataSizeCalculatorController.calculateResult
+# DataSizeCalculate
+GET     /datasize_calculate/home    controllers.DataSizeCalculatorController.index
+POST    /datasize_calculate/result  controllers.DataSizeCalculatorController.calculateResult
+
+# PLTconverter
+GET     /plt_convert/home       controllers.PLTConverterController.index
+POST    /plt_convert/upload     controllers.PLTConverterController.upload
+GET     /plt_convert/download   controllers.PLTConverterController.download(filename: String)
+
 
 GET /assets/*file  controllers.Assets.versioned(path="/public", file: Asset)
