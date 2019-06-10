@@ -2,7 +2,8 @@
 
 @main("DataSizeCalculator") {
     @if(resultList.length == 0) {
-        <p>@for(i <- 1 to 10000){失敗した}</p>
+        <p>失敗しました。</p>
+        <p>日本語を含むデータ型名は現在対応していません。またコメントを削除すると上手くいくかもしれません。</p>
 
     } else {
         @for(i <- resultList){
