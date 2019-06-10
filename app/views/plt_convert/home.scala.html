@@ -4,7 +4,7 @@
     @helper.form(action = routes.PLTConverterController.upload, 'enctype -> "multipart/form-data") {
         @helper.CSRF.formField
         <h2>PLTファイルを選択してください</h2>
-        <input type="file" name="plt_file">
+        <input type="file" name="plt_file" accept=".plt,.PLT">
 
         <p><input type="submit" value="変換"></p>
 
