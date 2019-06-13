@@ -1,0 +1,13 @@
+@()(implicit request: MessagesRequestHeader)
+
+@main("XML変換") {
+    @helper.form(action = routes.POListPrinterController.upload, 'enctype -> "multipart/form-data") {
+        @helper.CSRF.formField
+        <h2>XMLファイルを選択してください</h2>
+        <input type="file" name="plc_file" accept=".xml">
+
+        <p><input type="submit" value="抽出"></p>
+
+    }
+}
+

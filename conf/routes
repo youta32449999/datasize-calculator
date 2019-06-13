@@ -10,5 +10,9 @@ GET     /plt_convert/home       controllers.PLTConverterController.index
 POST    /plt_convert/upload     controllers.PLTConverterController.upload
 GET     /plt_convert/download   controllers.PLTConverterController.download(filename: String)
 
+# POListPrinter
+GET     /polist/home       controllers.POListPrinterController.index
+POST    /polist/upload     controllers.POListPrinterController.upload
+GET     /polist/download   controllers.POListPrinterController.download(filename: String)
 
 GET /assets/*file  controllers.Assets.versioned(path="/public", file: Asset)
