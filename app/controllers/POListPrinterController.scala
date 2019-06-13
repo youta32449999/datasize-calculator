@@ -41,12 +41,12 @@ class POListPrinterController @Inject()(cc: MessagesControllerComponents)(implic
         if (Files.notExists(file)) Files.createFile(file)
 
         // 書き込み
-        val pw = new PrintWriter(s"./tmp/plc/$resultFileName", "UTF-8")
+        val pw = new PrintWriter(s"./tmp/plc/$resultFileName", "Shift-JIS")
         pw.write(result)
         pw.close
 
         // 結果をダウンロード
-        Redirect(routes.POListPrinterController.download(s"./tmp/plc/${fileName}"))
+        Redirect(routes.POListPrinterController.download(s"./tmp/plc/${resultFileName}"))
       }
       case None => Redirect(routes.POListPrinterController.index)
     }
