@@ -1,5 +1,6 @@
 package services
 
+import scala.util.Try
 import scala.xml.{Node, XML}
 
 object POListPrinter {
@@ -211,7 +212,7 @@ object POListPrinter {
     * @return
     */
   def printPoFormat(poFormatSeq:Seq[Seq[String]]): String = {
-    (poFormatHeader +: poFormatSeq.sortBy(seq => seq(1).toInt * 100 + seq(2).toInt)).filter(_.nonEmpty).map(_.mkString(",")).mkString("\n")
+    (poFormatHeader +: poFormatSeq.sortBy(seq => Try(seq(1).replaceAll("INT#", "").toInt).getOrElse(999) * 100 + Try(seq(2).replaceAll("INT#", "").toInt).getOrElse(99))).filter(_.nonEmpty).map(_.mkString(",")).mkString("\n")
   }
 
   /**
